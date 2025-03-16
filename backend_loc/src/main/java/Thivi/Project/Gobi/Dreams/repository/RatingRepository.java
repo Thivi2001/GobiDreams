@@ -1,9 +1,9 @@
 package Thivi.Project.Gobi.Dreams.repository;
 
-import Thivi.Project.Gobi.Dreams.entity.Payment;
+import Thivi.Project.Gobi.Dreams.entity.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+public interface RatingRepository extends JpaRepository<Rating, Long> {
 }

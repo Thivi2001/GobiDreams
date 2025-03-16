@@ -1,13 +1,15 @@
 package Thivi.Project.Gobi.Dreams.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-public class UserLoginDTO {
+@AllArgsConstructor
+public class LoginDTO {
     private String email;
     private String password;
 }

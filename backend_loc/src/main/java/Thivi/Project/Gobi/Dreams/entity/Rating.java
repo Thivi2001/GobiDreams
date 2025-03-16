@@ -6,27 +6,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "photos")
+@Table(name = "ratings")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Photo {
+public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    @Column(name = "file_path", nullable = false)
-    private String filePath;
+    @Column(name = "rating", nullable = false)
+    private int rating; // Rating scale (e.g., 1-5)
 
-    @Column(name = "uploaded_date", nullable = false)
-    private LocalDateTime uploadedDate;
+    @Column(name = "review")
+    private String review; // Optional text review
 }

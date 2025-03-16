@@ -1,8 +1,8 @@
 package Thivi.Project.Gobi.Dreams.entity;
 
 public enum Role {
+    ADMIN,
     CUSTOMER,
     PHOTOGRAPHER,
-    TALENTED_ONE,
-    ADMIN
+    TALENT
 }

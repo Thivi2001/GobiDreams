@@ -1,15 +1,14 @@
 package Thivi.Project.Gobi.Dreams.service;
 
+import Thivi.Project.Gobi.Dreams.dto.RegistrationDTO;
 import Thivi.Project.Gobi.Dreams.dto.UserDTO;
-import Thivi.Project.Gobi.Dreams.entity.Role;
 import Thivi.Project.Gobi.Dreams.entity.User;
+import Thivi.Project.Gobi.Dreams.mapper.EntityMapper;
 import Thivi.Project.Gobi.Dreams.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,24 +18,29 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private EntityMapper entityMapper;
 
-    public User registerUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Encrypt password
-        return userRepository.save(user);
+    public UserDTO registerUser(RegistrationDTO registrationDTO) {
+        User user = new User();
+        user.setFirstName(registrationDTO.getFirstName());
+        user.setLastName(registrationDTO.getLastName());
+        user.setEmail(registrationDTO.getEmail());
+        user.setPassword(registrationDTO.getPassword());
+        user.setRole(registrationDTO.getRole());
+        userRepository.save(user);
+        return entityMapper.userToUserDTO(user);
     }
 
-    public Optional<User> getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(entityMapper::userToUserDTO)
+                .collect(Collectors.toList());
     }
 
-    public List<UserDTO> getUsersByRole(Role role) {
-        List<User> users = userRepository.findByRole(role);
-        return users.stream().map(this::convertToDTO).collect(Collectors.toList());
+    public UserDTO getUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        return entityMapper.userToUserDTO(user);
     }
-
-    private UserDTO convertToDTO(User user) {
-        return new UserDTO(user.getId(), user.getFullName(), user.getEmail(), user.getRole());
-    }
-
 }

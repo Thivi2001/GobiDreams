@@ -1,23 +1,18 @@
 package Thivi.Project.Gobi.Dreams.dto;
 
-import Thivi.Project.Gobi.Dreams.entity.BookingStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingDTO {
+public class RatingDTO {
 
     private Long id;
     private Long customerId;
-    private Long photographerId;
-    private LocalDateTime sessionDate;
-    private String eventType;
-    private BookingStatus status;
+    private int rating; // Rating scale (e.g., 1-5)
+    private String review; // Optional text review
 }

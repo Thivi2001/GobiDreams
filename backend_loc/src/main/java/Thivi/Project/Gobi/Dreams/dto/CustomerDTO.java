@@ -5,18 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDTO {
+public class CustomerDTO {
 
     private Long id;
-    private Long bookingId;
-    private BigDecimal amount;
-    private LocalDateTime paymentDate;
-    private String paymentMethod;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
+    private String address;
 }

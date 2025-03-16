@@ -1,9 +1,12 @@
 package Thivi.Project.Gobi.Dreams.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "bookings")
@@ -12,21 +15,24 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User customer;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "talent_id", nullable = false)
-    private Talent talent;
+    @JoinColumn(name = "photographer_id")
+    private Photographer photographer;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
-    private Date bookingDate;
+    @Column(name = "session_date", nullable = false)
+    private LocalDateTime sessionDate;
+
+    @Column(name = "event_type", nullable = false)
+    private String eventType;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
